@@ -10,6 +10,7 @@ export default function ToDo() {
 
     const handleCreateTodo = () => {
         dispatch(createTodo(todo))
+        setTodo("");
     }
 
     const handleKeyDown = (event) => {
@@ -18,15 +19,18 @@ export default function ToDo() {
     }
 
     return(
-        <div className="card" style={{maxWidth: "400px", width: "100%", margin: "0 auto"}}>
-            <div className="card-body">
-                <input type="text" placeholder="Add To Do" value={todo} 
-                    onChange={(ev) => setTodo(ev.target.value)} onKeyDown={handleKeyDown} />
+        <>
+            <h1 className="pb-3"> TODO List </h1>
+            <div className="card" style={{maxWidth: "400px", width: "100%", margin: "0 auto"}}>
+                <div className="card-body">
+                    <input type="text" placeholder="Add To Do" value={todo} 
+                        onChange={(ev) => setTodo(ev.target.value)} onKeyDown={handleKeyDown} />
 
-                <button onClick={handleCreateTodo}> Add Item </button>
-                
-                <ToDoList />
+                    <button onClick={handleCreateTodo}> Add Item </button>
+                    
+                    <ToDoList />
+                </div>
             </div>
-        </div>
+        </>
     )
 } 

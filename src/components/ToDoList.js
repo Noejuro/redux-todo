@@ -1,14 +1,9 @@
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeTodo } from "../actions/todo";
 
 export default function ToDoList() {
     const dispatch  = useDispatch()
     const { todos } = useSelector(state => state.todos)
-
-    useEffect(() => {
-        console.log(todos)
-    }, [todos])
 
     const handleRemoveTodo = (text) => { dispatch(removeTodo(text)) }
 

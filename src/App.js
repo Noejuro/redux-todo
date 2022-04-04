@@ -1,19 +1,22 @@
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import './App.css';
 import ToDo from './views/ToDo'
-import { addCount, subtractCount } from './actions/count'
+import { persistTodos } from './actions/todo'
+import { useEffect } from 'react';
+import Count from './views/Count';
 
 function App() {
   const dispatch  = useDispatch()
-  const { count } = useSelector(state => state.count)
+
+  useEffect(() => {
+    dispatch(persistTodos());
+  }, [])
 
   return (
     <div className="App p-5">
       <ToDo />
-      <h3> { count } </h3>
-      <button onClick={() => dispatch(subtractCount())}> - </button>
-      <button onClick={() => dispatch(addCount())}> + </button>
+      <Count />
     </div>
   );
 }

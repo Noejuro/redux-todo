@@ -15,18 +15,30 @@ export const todos = (state = initialState, action) => {
                 isCompleted: false
             }
 
-            return {...state, todos: state.todos.concat(newTodo)};
+            const newState = {...state, todos: state.todos.concat(newTodo)};
+
+            localStorage.setItem("todos", JSON.stringify(newState))
+
+            return newState;
         }
         
         case "REMOVE_TODO": {
             const { text } = payload;
 
-            const newTodo = {
-                text,
-                isCompleted: false
-            }
+            const newState = {...state, todos: state.todos.filter(todo => todo.text !== text)};
 
-            return {...state, todos: state.todos.concat(newTodo)};
+            localStorage.setItem("todos", JSON.stringify(newState))
+
+            return newState;
+        }
+
+        case "PERSIST_TODOS": {
+            const localTodos = JSON.parse(localStorage.getItem('todos'));
+
+            if (!!localTodos)
+                return {...state, ...localTodos}
+            else 
+                return state
         }
 
         default: 
